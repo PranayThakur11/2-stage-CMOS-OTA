@@ -1,0 +1,35 @@
+  TWO-STAGE CMOS OTA: FINAL AC ANALYSIS REPORT
+
+1. OPEN-LOOP DC GAIN (Av)
+   - Value: ~80 dB
+   - Details: Measured from the open-loop differential frequency response,
+     providing robust low-frequency voltage amplification.
+
+2. UNITY-GAIN BANDWIDTH (UGBW)
+   - Value: ~5.23 MHz to 5.59 MHz
+   - Details: Verified via open-loop crossover (~5.23 MHz) and confirmed
+     by the closed-loop -3 dB cutoff frequency (5.587 MHz at -3.02 dB).
+
+3. PHASE MARGIN (PM)
+   - Value: ~86.7°
+   - Details: Confirmed by open-loop phase at the 0 dB crossing and the 
+     smooth, peak-free closed-loop phase rollout (-48.69° at the 
+     bandwidth edge), ensuring high stability with zero ringing.
+
+4. COMMON-MODE REJECTION RATIO (CMRR)
+   - Value: ~90 dB
+   - Details: Derived from open-loop differential gain (+80 dB) and 
+     common-mode gain (~-10 dB), confirming excellent common-mode 
+     noise suppression.
+
+5. POWER SUPPLY REJECTION RATIO (PSRR+)
+   - Value: ~80 dB
+   - Details: Calculated from differential gain (80 dB) and low-frequency 
+     positive supply gain (0 dB from VDD AC injection), indicating solid 
+     ripple rejection at low frequencies.
+
+6. CLOSED-LOOP UNITY-GAIN RESPONSE
+   - Status: Flat 0 dB response
+   - Details: Verified with the output tied to the inverting input and 
+     input common-mode matched to the DC operating point (1.60 V), 
+     showing a completely flat response up to the cutoff frequency.

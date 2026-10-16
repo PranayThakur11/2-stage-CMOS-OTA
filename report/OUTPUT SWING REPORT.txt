@@ -1,0 +1,21 @@
+TWO-STAGE CMOS OTA: OPEN-LOOP OUTPUT SWING REPORT
+
+
+1. TEST BENCH CONFIGURATION
+   - Topology: Open-loop configuration (feedback loop broken).
+   - Inverting Input (V1): Fixed DC voltage at 1.62 V (AC = 0).
+   - Non-inverting Input (V2): DC voltage source swept linearly from 
+     1.58 V to 1.66 V with a 1 mV step increment (.dc V2 1.58 1.66 0.001).
+   - Supply Rails: Dual supply rails configured at ±2.5 V.
+
+2. WAVEFORM ANALYSIS & TRANSITION REGION
+   - High-Gain Transition: Due to the high open-loop DC gain (~80 dB), 
+     sweeping the input in a tight window around the 1.62 V bias point 
+     successfully captures the active transition region[cite: 7].
+   - Output Behavior: The output voltage (V(n007), green) transitions smoothly 
+     from the negative rail to the positive rail within the narrow input delta[cite: 7].
+
+3. EXTRACTED OUTPUT SWING LIMITS
+   - Negative Output Swing Limit: -2.5 V (clips at the negative supply rail)[cite: 7].
+   - Positive Output Swing Limit: ~+2.35 V to +2.4 V (before flattening/clipping)[cite: 7].
+   - Total Output Swing Range: [-2.5 V, +2.35 V]

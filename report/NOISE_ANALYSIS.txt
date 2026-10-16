@@ -1,0 +1,22 @@
+TWO-STAGE CMOS OTA: NOISE ANALYSIS REPORT
+
+1. TEST BENCH CONFIGURATION
+   - Analysis Type: Stochastic noise spectral density analysis (.noise).
+   - Frequency Sweep: Decade sweep from 1 Hz to 1 GHz with 10 points per decade[cite: 9].
+   - Output Parameter: Output noise spectral density v(onoise)[cite: 9].
+
+2. WAVEFORM ANALYSIS & INSIGHTS
+   - Flat Noise Floor (Thermal/White Noise): At low-to-mid frequencies 
+     (from 1 Hz up to ~1 MHz), the output noise density remains flat at 
+     approximately 28 nV/√Hz[cite: 9].
+   - Low Flicker Noise Corner: The absence of a sharp upward rise at the 
+     lowest frequencies (down to 1 Hz) indicates that the 1/f (flicker) noise 
+     corner frequency is very low or masked by dominant thermal noise sources[cite: 9].
+   - Noise Bandwidth Roll-off: Starting around 1 MHz, the noise density 
+     rolls off significantly, dropping to ~7 nV/√Hz at high frequencies[cite: 9]. 
+     This attenuation matches the frequency limitations and pole filtering 
+     of the OTA's closed-loop bandwidth.
+
+3. EXTRACTED NOISE SPECIFICATIONS
+   - Low-Frequency Output Noise Floor: ~28 nV/√Hz[cite: 9]
+   - High-Frequency Attenuated Floor: ~7 nV/√Hz[cite: 9]

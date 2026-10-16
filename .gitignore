@@ -1,0 +1,35 @@
+# LTspice temporary and simulation files
+*.raw
+*.log
+*.net
+*.op.raw
+*.bak
+*.plt
+*.fft
+*.tmp
+
+# Operating system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor and IDE files
+.vscode/
+.idea/
+
+# Python cache (if used for analysis scripts)
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Temporary files
+*.swp
+*.swo
+*~
+
+# Keep project source files, reports, calculations, and images tracked
+!ltspice/*.asc
+!calculations/*.txt
+!images/*.png
+!report/*.pdf

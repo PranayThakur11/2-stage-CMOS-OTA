@@ -1,0 +1,19 @@
+TWO-STAGE CMOS OTA: FRA FREQUENCY RESPONSE REPORT
+
+
+1. TEST BENCH CONFIGURATION
+   - Simulation Method: Transient Frequency Response Analysis (.FRA).
+   - Feedback: Closed-loop configuration with FRA component inserted for 
+     loop gain and stability evaluation.
+
+2. EXTRACTED PERFORMANCE METRICS
+   - Unity Gain Bandwidth (UGBW / F(0dB)): 5.251 MHz[cite: 8].
+   - Phase Margin (PM): 86.7532°[cite: 8].
+
+3. WAVEFORM ANALYSIS & INSIGHTS
+   - High Stability: The phase margin of ~86.8° indicates exceptional 
+     stability with virtually zero risk of ringing or overshoot during 
+     transient steps[cite: 8].
+   - Roll-off Characteristics: The loop gain shows a clean single-pole 
+     dominant roll-off at ~20 dB/decade starting from low frequencies, 
+     crossing 0 dB smoothly at 5.251 MHz[cite: 8].

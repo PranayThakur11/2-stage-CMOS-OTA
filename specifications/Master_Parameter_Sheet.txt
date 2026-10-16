@@ -1,0 +1,57 @@
+TWO-STAGE CMOS OTA — MASTER PARAMETER SHEET
+
+Project: Two-Stage CMOS OTA Design and Simulation
+Reference: two_stage_OTA_design_procedure.pdf
+Simulation tool: LTspice
+
+1. DESIGN SPECIFICATIONS FROM THE PDF
+
+DC voltage gain: > 5000 V/V
+Gain-bandwidth product: 5 MHz
+Positive supply VDD: +2.5 V
+Negative supply VSS: -2.5 V
+Load capacitance CL: 10 pF
+Slew rate: > 10 V/us
+Output voltage swing: -2 V to +2 V
+Phase margin: 60 degrees
+Input common-mode range: -1 V to +2 V
+Maximum power dissipation: 2 mW
+
+2. NOMINAL MOSFET PARAMETERS FROM THE PDF
+
+NMOS:
+Threshold voltage Vthn = 0.7 V
+Threshold voltage tolerance = +/- 0.15 V
+Channel-length modulation lambda_n = 0.04 V^-1
+Process transconductance parameter mu_n*Cox = 110 uA/V^2
+Process parameter tolerance = +/- 10%
+
+PMOS:
+Threshold voltage Vthp = -0.7 V
+Threshold voltage tolerance = +/- 0.15 V
+Channel-length modulation lambda_p = 0.05 V^-1
+Process transconductance parameter mu_p*Cox = 50 uA/V^2
+Process parameter tolerance = +/- 10%
+
+3. PARAMETERS TO CALCULATE
+
+Reference current Iref
+Branch currents ID1 through ID8
+Transistor dimensions W1/L1 through W8/L8
+Overdrive voltages
+Transconductances gm1 through gm8
+Output resistances ro1 through ro8
+First-stage gain Av1
+Second-stage gain Av2
+Overall DC gain Av0
+Miller compensation capacitance CC
+Dominant and nondominant poles
+Compensation zero
+Unity-gain frequency
+Phase margin and gain margin
+Positive and negative slew rates
+Input common-mode limits
+Output voltage swing
+Power dissipation
+
+

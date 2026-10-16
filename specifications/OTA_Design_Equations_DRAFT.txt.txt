@@ -1,0 +1,345 @@
+TWO-STAGE CMOS OTA
+DESIGN EQUATIONS AND SOURCE PARAMETERS
+
+Reference: two_stage_OTA_design_procedure.pdf
+Purpose: Record source equations and design requirements.
+Notation follows the PDF wherever readable.
+
+==================================================
+1. CIRCUIT TO BE DESIGNED
+==================================================
+
+Two-stage CMOS OTA with single-ended output.
+
+First stage:
+M1, M2: NMOS differential input pair
+M3, M4: PMOS current-mirror active load
+M5: NMOS tail-current source
+
+Second stage:
+M6: PMOS common-source amplifier
+M7: NMOS current-source load
+
+Bias circuit:
+M8: Diode-connected NMOS
+Iref: Reference current
+
+Frequency compensation:
+Cc: Miller compensation capacitor between the
+first-stage output node and final output node.
+
+Load:
+CL: Capacitive load connected from output to VSS.
+
+==================================================
+2. DESIGN SPECIFICATIONS FROM THE PDF
+==================================================
+
+DC voltage gain: Av0 > 5000 V/V
+Gain-bandwidth product: GB = 5 MHz
+Positive supply: VDD = +2.5 V
+Negative supply: VSS = -2.5 V
+Load capacitance: CL = 10 pF
+Slew rate: SR > 10 V/us
+Output voltage swing: -2 V to +2 V
+Phase margin: PM = 60 degrees
+Input common-mode range: -1 V to +2 V
+Power dissipation: Pdiss <= 2 mW
+
+These are design targets, not measured results.
+
+==================================================
+3. MOSFET PARAMETERS GIVEN IN THE PDF
+==================================================
+
+NMOS:
+Vthn = 0.7 V +/- 0.15 V
+lambda_n = 0.04 V^-1
+mu_n*Cox = 110 uA/V^2 +/- 10%
+
+PMOS:
+Vthp = -0.7 V +/- 0.15 V
+lambda_p = 0.05 V^-1
+mu_p*Cox = 50 uA/V^2 +/- 10%
+
+Note:
+These parameters are used in the hand calculations.
+A complete LTspice MOSFET model may require additional
+model parameters. Any additions must be documented.
+
+==================================================
+4. MOSFET CURRENT AND OVERDRIVE EQUATIONS
+==================================================
+
+For an NMOS in saturation, using the square-law model:
+
+ID = (1/2)*mu_n*Cox*(W/L)*(VGS - Vthn)^2
+
+For a PMOS in saturation:
+
+ID = (1/2)*mu_p*Cox*(W/L)*(VSG - |Vthp|)^2
+
+Define the overdrive voltage:
+
+VOV,n = VGS - Vthn
+
+VOV,p = VSG - |Vthp|
+
+Define the process/device parameter:
+
+beta_n = mu_n*Cox*(W/L)
+beta_p = mu_p*Cox*(W/L)
+
+Then:
+
+ID = (1/2)*beta*VOV^2
+
+Therefore:
+
+VOV = sqrt(2*ID/beta)
+
+W/L = 2*ID/(mu*Cox*VOV^2)
+
+These equations assume saturation and the simplified
+square-law MOSFET model.
+
+==================================================
+5. SMALL-SIGNAL PARAMETERS
+==================================================
+
+Transconductance:
+
+gm = 2*ID/VOV
+
+Equivalently:
+
+gm = sqrt(2*beta*ID)
+
+Approximate output resistance:
+
+ro = 1/(lambda*ID)
+
+These are first-order estimates. LTspice results can
+differ because of the chosen transistor model.
+
+==================================================
+6. FIRST-STAGE GAIN
+==================================================
+
+For the first-stage differential amplifier with
+PMOS current-mirror load:
+
+Av1 ~= -gm2*(ro2 || ro4)
+
+For matched devices:
+
+ID2 = ID4 = ID5/2
+
+ro2 = 1/(lambda_n*ID2)
+ro4 = 1/(lambda_p*ID4)
+
+The parallel resistance is:
+
+ro2 || ro4 = (ro2*ro4)/(ro2 + ro4)
+
+The PDF also derives:
+
+ro2 || ro4 ~= 1/[ID2*(lambda_n + lambda_p)]
+
+Therefore:
+
+Av1 ~= -gm2/[ID2*(lambda_n + lambda_p)]
+
+==================================================
+7. SECOND-STAGE GAIN
+==================================================
+
+The second stage is a PMOS common-source amplifier
+with an NMOS current-source load.
+
+Av2 ~= -gm6*(ro6 || ro7)
+
+For matched branch currents:
+
+ID6 = ID7
+
+ro6 = 1/(lambda_p*ID6)
+ro7 = 1/(lambda_n*ID7)
+
+Therefore:
+
+ro6 || ro7 ~= 1/[ID6*(lambda_p + lambda_n)]
+
+Hence:
+
+Av2 ~= -gm6/[ID6*(lambda_p + lambda_n)]
+
+==================================================
+8. OVERALL VOLTAGE GAIN
+==================================================
+
+Av0 = Av1*Av2
+
+Av0 ~= gm2*(ro2 || ro4)*gm6*(ro6 || ro7)
+
+The two stage gains are both inverting under the
+stated stage-gain convention, so their product is
+positive for the overall low-frequency gain.
+
+==================================================
+9. MILLER COMPENSATION AND SLEW RATE
+==================================================
+
+The PDF gives the following approximate relationships:
+
+GB ~= gm1/Cc
+
+SR = ID5/Cc
+
+Therefore, for a required slew rate:
+
+ID5 >= SR_required*Cc
+
+For a required gain-bandwidth product:
+
+Cc ~= gm1/GB
+
+The PDF specifies the following initial compensation
+guideline for a 60-degree phase margin:
+
+Cc > 0.22*CL
+
+This is a design guideline from the source, not a
+guarantee of 60-degree phase margin for every model.
+
+==================================================
+10. OUTPUT POLE AND COMPENSATION ZERO
+==================================================
+
+Approximate output pole:
+
+p2 ~= -gm6/CL
+
+Approximate right-half-plane zero:
+
+zRHP ~= gm6/Cc
+
+The zero is in the right half-plane under the
+standard uncompensated-feedforward Miller topology
+shown in the PDF.
+
+The pole and zero locations must be verified using
+the simulated frequency response.
+
+==================================================
+11. INPUT COMMON-MODE RANGE
+==================================================
+
+Positive input common-mode limit, as developed in
+the PDF:
+
+Vin(max) = VDD - VSG3 + Vth1
+
+Using the PDF's sizing derivation:
+
+VSG3 = sqrt(ID5/beta3) + |Vth3|
+
+Therefore:
+
+Vin(max) = VDD - sqrt(ID5/beta3)
+           - |Vth3| + Vth1
+
+Negative input common-mode limit:
+
+Vin(min) = VGS1 + VDS5 + VSS
+
+Using the PDF's equation for M1:
+
+VGS1 = sqrt(ID5/beta1) + Vth1
+
+Therefore:
+
+Vin(min) = sqrt(ID5/beta1) + Vth1
+           + VDS5 + VSS
+
+These expressions follow the PDF's supply and voltage
+notation. Confirm voltage references and signs against
+the exact schematic before using them numerically.
+
+==================================================
+12. BIAS AND CURRENT-MIRROR SIZING
+==================================================
+
+The PDF uses M8 as a diode-connected NMOS to establish
+the gate bias for M5 and M7.
+
+M5, M8 and M7 use the NMOS current-mirror relationship.
+
+For devices sharing the same gate-source voltage and
+operating under the same square-law assumptions:
+
+ID5/ID8 = (W/L)5/(W/L)8
+
+ID7/ID8 = (W/L)7/(W/L)8
+
+The PDF also derives the PMOS sizing relationship:
+
+(W/L)6 = 2*(ID7/ID5)*(W/L)3
+
+This relationship depends on the matching and current
+assumptions stated in the source.
+
+==================================================
+13. DESIGN PROCEDURE FROM THE PDF
+==================================================
+
+Step 1:
+Choose the smallest device channel length that keeps
+channel-length modulation acceptably controlled and
+provides good current-mirror matching.
+
+Step 2:
+Choose the Miller compensation capacitance Cc from
+the desired phase-margin requirement.
+
+Step 3:
+Determine the minimum tail current ID5 from the
+required slew rate:
+
+ID5 = SR*Cc
+
+If slew rate is not specified, the PDF gives an
+alternative estimate based on settling time:
+
+ID5 ~= 10*((VDD + |VSS|)/(2*Ts))
+
+Step 4:
+Size PMOS transistor M3 using the maximum input
+common-mode requirement. Set M4 to match M3.
+
+Step 5:
+Verify that the pole associated with M3 and its
+parasitic capacitance is not dominant. The PDF uses
+the condition:
+
+p3 = gm3/(2*Cgs3) > 10*GB
+
+The source uses Cgs3 ~= (2/3)*Cox*W*L and derives
+gm3 from the transistor current and overdrive voltage.
+
+Further transistor-sizing steps must be extracted
+from the remaining source pages before proceeding.
+
+==================================================
+14. SIMULATION AND VERIFICATION RECORD
+==================================================
+
+For every design parameter, record:
+
+1. Source equation and PDF page.
+2. Substituted values and units.
+3. Hand-calculated result.
+4. LTspice setup or measurement used.
+5. Simulated result.
+6. Difference between calculated and simulated values.
+7. Whether the specification is satisfied.

@@ -1,0 +1,19 @@
+  TWO-STAGE CMOS OTA: INPUT COMMON-MODE RANGE (ICMR) REPORT
+
+1. TEST BENCH CONFIGURATION
+   - Topology: Unity-gain buffer configuration (Vout tied to inverting input).
+   - Input Setup: V2 configured as a DC voltage source, swept linearly 
+     from 0 V to 2.5 V with a 0.01 V step increment.
+
+2. WAVEFORM ANALYSIS & TRACKING
+   - Linear Region: The output voltage (V(n007), green) tracks the input 
+     sweep (V(n011), blue) perfectly in a 1:1 ratio from 0 V up to ~2.35 V[cite: 6].
+   - Upper Dropout Point: At approximately 2.35 V, the output begins to 
+     deviate and flatten, signaling that the input differential pair 
+     transistors are losing headroom and dropping out of saturation.
+
+3. EXTRACTED ICMR SPECIFICATION
+   - Lower Bound: ~0.0 V[cite: 6]
+   - Upper Bound: ~2.35 V
+   - Total Input Common-Mode Range: [0.0 V, 2.35 V]
+

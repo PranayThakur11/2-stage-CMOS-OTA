@@ -1,0 +1,19 @@
+  TWO-STAGE CMOS OTA: TRANSIENT ANALYSIS REPORT
+
+1. TEST BENCH CONFIGURATION
+   - Topology: Unity-gain buffer configuration (Vout tied to inverting input).
+   - Input Source (V2): Pulse signal from 1.4 V to 1.8 V (400 mV step) 
+     centered around the 1.6 V DC common-mode operating point.
+   - Simulation Setup: 10 µs transient run time.
+
+2. STEP RESPONSE & STABILITY
+   - Observation: Clean step response tracking with zero overshoot or ringing.
+   - Correlation: Directly validates the high phase margin (~86.7°) 
+     confirmed during frequency-domain AC analysis.
+
+3. DYNAMICS & SLEW RATE
+   - Response Type: Smooth exponential charging curve, indicating the OTA 
+     operates within its linear small-signal region for the 400 mV step size.
+   - Estimated Slew Rate: ~12 V/µs (derived from the steepest linear 
+     transition region of the output waveform).
+
