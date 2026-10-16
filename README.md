@@ -122,7 +122,7 @@ UGBW ≈ gm1 / (2 × π × C1)
 
 ### 6. Transient Response
 
-![Transient Response](images/transient_waveform_m.png)
+![Transient Response](images/transient_waveform.png)
 
 ## AC Analysis
 
